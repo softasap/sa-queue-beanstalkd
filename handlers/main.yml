@@ -4,3 +4,4 @@
   - name: restart beanstalkd
     service: name=beanstalkd state=restarted
     become: yes
+    when: docker_test is not defined
