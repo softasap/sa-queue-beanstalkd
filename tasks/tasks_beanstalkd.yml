@@ -4,7 +4,6 @@
     command: dpkg-query -W beanstalkd
     register: beanstalkd_check_deb
     become: yes
-    failed_when: beanstalkd_check_deb.rc > 1
     changed_when: beanstalkd_check_deb.rc == 1
     tags:
       - beanstalkd
