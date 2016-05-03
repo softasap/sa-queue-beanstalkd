@@ -1,0 +1,26 @@
+---
+
+  - name: DBeawer | Check if my_package is installed
+    command: dpkg-query -W beanstalkd
+    register: beanstalkd_check_deb
+    become: yes
+    failed_when: beanstalkd_check_deb.rc > 1
+    changed_when: beanstalkd_check_deb.rc == 1
+    tags:
+      - beanstalkd
+
+
+  - name: Beanstalkd | Install package
+    apt: pkg=beanstalkd state=present
+    become: yes
+    when: beanstalkd_check_deb.rc == 1
+    notify: restart beanstalkd
+    tags:
+      - beanstalkd
+
+  - name: Beanstalkd | Patch settings /etc/default/beanstalkd
+    lineinfile: dest=/etc/default/beanstalkd regexp="{{item.regexp}}" line="{{item.line}}"
+    with_items: beanstalkd_properties
+    when: beanstalkd_properties is defined
+    notify: restart beanstalkd
+    become: yes

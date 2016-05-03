@@ -1,0 +1,3 @@
+---
+# tasks file for sa-queue-beanstalkd
+  - include: tasks_beanstalkd.yml

@@ -1,0 +1,6 @@
+---
+# handlers file for sa-queue-beanstalkd
+
+  - name: restart beanstalkd
+    service: name=beanstalkd state=restarted
+    become: yes
