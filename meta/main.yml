@@ -29,8 +29,6 @@ galaxy_info:
     - queue
     - beanstalkd
     - ubuntu
-  dependencies:
-  - role: Voronenko.developer_recipe
   #platforms:
   #- name: EL
   #  versions:
